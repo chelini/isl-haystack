@@ -1,3 +1,0 @@
-[submodule "imath"]
-	path = imath
-	url = git@github.com:gysit/haystack-imath.git
