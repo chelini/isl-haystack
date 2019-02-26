@@ -51,16 +51,16 @@ AM_CONDITIONAL(GENERATE_DOC, test -n "$PERL" -a -n "$PDFLATEX" -a -n "$POD2HTML"
 AX_CREATE_STDINT_H(include/isl/stdint.h)
 
 AC_ARG_WITH([int],
-	    [AS_HELP_STRING([--with-int=imath-32],
+	    [AS_HELP_STRING([--with-int=imath-32|gmp],
 			    [Which package to use to represent
 				multi-precision integers [default=imath-32]])],
 	    [], [with_int=imath-32])
 case "$with_int" in
-imath-32)
+imath-32|gmp)
 	;;
 *)
 	AC_MSG_ERROR(
-	    [bad value ${withval} for --with-int (use imath-32)])
+	    [bad value ${withval} for --with-int (use imath-32 or gmp)])
 esac
 
 AC_SUBST(MP_CPPFLAGS)

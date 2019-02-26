@@ -33,7 +33,7 @@ struct tab_lp {
 };
 
 #ifdef USE_GMP_FOR_MP
-#define GBR_type		    	    impq_t
+#define GBR_type		    	    mpq_t
 #define GBR_init(v)		    	    mpq_init(v)
 #define GBR_clear(v)		    	    mpq_clear(v)
 #define GBR_set(a,b)			    mpq_set(a,b)
