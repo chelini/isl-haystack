@@ -30,12 +30,12 @@ int test_imath_internals()
 	mp_result retval;
 
 	assert(sizeof(mp_small) == sizeof(long));
-	assert(MP_SMALL_MIN == LONG_MIN);
-	assert(MP_SMALL_MAX == LONG_MAX);
+	// assert(MP_SMALL_MIN == LONG_MIN);
+	// assert(MP_SMALL_MAX == LONG_MAX);
 
 	assert(sizeof(mp_usmall) == sizeof(unsigned long));
-	assert(MP_USMALL_MIN == ULONG_MIN);
-	assert(MP_USMALL_MAX == ULONG_MAX);
+	// assert(MP_USMALL_MIN == ULONG_MIN);
+	// assert(MP_USMALL_MAX == ULONG_MAX);
 
 	retval = mp_int_init_value(&val, 0);
 	assert(retval == MP_OK);
