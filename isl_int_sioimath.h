@@ -29,7 +29,7 @@
 #endif
 
 /* The type to represent integers optimized for small values. It is either a
- * pointer to an mp_int ( = mpz_t*; big representation) or an int32_t (small
+ * pointer to an mp_int ( = impz_t*; big representation) or an int32_t (small
  * represenation) with a discriminator at the least significant bit. In big
  * representation it will be always zero because of heap alignment. It is set
  * to 1 for small representation and use the 32 most significant bits for the
@@ -40,7 +40,7 @@
  * Big representation:
  * MSB                                                          LSB
  * |------------------------------------------------------------000
- * |                            mpz_t*                            |
+ * |                            impz_t*                            |
  * |                           != NULL                            |
  *
  * Small representation:
@@ -184,7 +184,7 @@ inline isl_sioimath isl_sioimath_encode_big(mp_int val)
  * Most sig digit  Least sig digit
  */
 typedef struct {
-	mpz_t big;
+	impz_t big;
 	mp_digit digits[(sizeof(uintmax_t) + sizeof(mp_digit) - 1) /
 	                sizeof(mp_digit)];
 } isl_sioimath_scratchspace_t;
@@ -1116,7 +1116,7 @@ inline int isl_sioimath_is_divisible_by(isl_sioimath_src lhs,
 {
 	isl_sioimath_scratchspace_t lhsscratch, rhsscratch;
 	int32_t lhssmall, rhssmall;
-	mpz_t rem;
+	impz_t rem;
 	int cmp;
 
 	if (isl_sioimath_sgn(rhs) == 0)

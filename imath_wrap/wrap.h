@@ -62,7 +62,7 @@
 #define impz_submul	isl_impz_submul
 #define impz_sub_ui	isl_impz_sub_ui
 #define impz_swap	isl_impz_swap
-#define impz_tdiv_q	isl_impz_tdiv_q
+#define iimpz_tdiv_q	isl_iimpz_tdiv_q
 #define mp_error_string	isl_mp_error_string
 #define mp_int_abs	isl_mp_int_abs
 #define mp_int_add	isl_mp_int_add

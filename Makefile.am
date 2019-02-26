@@ -53,7 +53,8 @@ MP_SRC = \
 	imath_wrap/wrap.h \
 	imath_wrap/gmp_compat.c \
 	imath_wrap/imath.c \
-	imath_wrap/imrat.c
+	imath_wrap/imrat.c \
+	isl_val_imath_gmp.c
 
 noinst_PROGRAMS += isl_test_imath
 TESTS += isl_test_imath
@@ -66,7 +67,7 @@ else
 MP_SRC += isl_val_imath.c
 endif
 
-MP_INCLUDE_H =
+MP_INCLUDE_H = include/isl/val_gmp.h
 endif
 
 if GMP_FOR_MP

@@ -1,5 +1,5 @@
 AC_DEFUN([AX_DETECT_GMP], [
-AC_DEFINE([USE_GMP_FOR_MP], [], [use gmp to implement isl_int])
+#AC_DEFINE([USE_GMP_FOR_MP], [], [use gmp to implement isl_int])
 AX_SUBMODULE(gmp,system|build,system)
 case "$with_gmp" in
 system)

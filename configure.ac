@@ -51,16 +51,16 @@ AM_CONDITIONAL(GENERATE_DOC, test -n "$PERL" -a -n "$PDFLATEX" -a -n "$POD2HTML"
 AX_CREATE_STDINT_H(include/isl/stdint.h)
 
 AC_ARG_WITH([int],
-	    [AS_HELP_STRING([--with-int=gmp|imath|imath-32],
+	    [AS_HELP_STRING([--with-int=imath-32],
 			    [Which package to use to represent
-				multi-precision integers [default=gmp]])],
-	    [], [with_int=gmp])
+				multi-precision integers [default=imath-32]])],
+	    [], [with_int=imath-32])
 case "$with_int" in
-gmp|imath|imath-32)
+imath-32)
 	;;
 *)
 	AC_MSG_ERROR(
-	    [bad value ${withval} for --with-int (use gmp, imath or imath-32)])
+	    [bad value ${withval} for --with-int (use imath-32)])
 esac
 
 AC_SUBST(MP_CPPFLAGS)
@@ -69,10 +69,12 @@ AC_SUBST(MP_LDFLAGS)
 AC_SUBST(MP_LIBS)
 case "$with_int" in
 gmp)
+	AC_DEFINE([USE_GMP_FOR_MP], [], [use gmp to implement isl_int])
 	AX_DETECT_GMP
 	;;
 imath|imath-32)
 	AX_DETECT_IMATH
+	AX_DETECT_GMP
 	;;
 esac
 if test "x$with_int" = "ximath-32" -a "x$GCC" = "xyes"; then

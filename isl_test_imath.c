@@ -26,7 +26,7 @@
  */
 int test_imath_internals()
 {
-	mpz_t val;
+	impz_t val;
 	mp_result retval;
 
 	assert(sizeof(mp_small) == sizeof(long));
