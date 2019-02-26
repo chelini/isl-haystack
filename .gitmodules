@@ -1,4 +1,4 @@
-[submodule "haystack-imath"]
-	path = haystack-imath
+[submodule "imath"]
+	path = imath
 	url = git@github.com:gysit/haystack-imath.git
 	branch = master
