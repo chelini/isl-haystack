@@ -73,8 +73,8 @@ gmp)
 	AX_DETECT_GMP
 	;;
 imath|imath-32)
-	AX_DETECT_IMATH
 	AX_DETECT_GMP
+	AX_DETECT_IMATH
 	;;
 esac
 if test "x$with_int" = "ximath-32" -a "x$GCC" = "xyes"; then

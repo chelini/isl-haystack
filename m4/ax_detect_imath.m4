@@ -1,9 +1,9 @@
 AC_DEFUN([AX_DETECT_IMATH], [
 AC_DEFINE([USE_IMATH_FOR_MP], [], [use imath to implement isl_int])
 
-MP_CPPFLAGS="-I$srcdir/imath_wrap"
-MP_LDFLAGS=""
-MP_LIBS=""
+MP_CPPFLAGS="$MP_CPPFLAGS -I$srcdir/imath_wrap"
+MP_LDFLAGS="$MP_LDFLAGS"
+MP_LIBS="$MP_LIBS"
 
 SAVE_CPPFLAGS="$CPPFLAGS"
 CPPFLAGS="$MP_CPPFLAGS $CPPFLAGS"
