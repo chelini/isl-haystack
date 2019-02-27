@@ -36,30 +36,30 @@ void gmp_to_isl_int(isl_sioimath_ptr dst, const mpz_t src)
 }
 
 // import gmp number to sioimath
-void isl_val_to_gmp(mpz_t dst, isl_val *src) 
+void isl_int_to_gmp(mpz_t dst, isl_sioimath_ptr src) 
 {
-	if (isl_val_is_zero(src))
+	if (isl_int_is_zero(src))
 	{
 		mpz_set_ui(dst, 0);
 	}
 	else
 	{
-		size_t length = (isl_sioimath_sizeinbase(*src->n, 2) + (8 * sizeof(long)) - 1) / (8 * sizeof(long));
+		size_t length = (isl_sioimath_sizeinbase(*src, 2) + (8 * sizeof(long)) - 1) / (8 * sizeof(long));
 		isl_sioimath_scratchspace_t scratch;
 		if (length <= 10)
 		{
 			long chunks[10];
-			impz_export(chunks, NULL, -1, sizeof(long), 0, 0, isl_sioimath_bigarg_src(*src->n, &scratch));
+			impz_export(chunks, NULL, -1, sizeof(long), 0, 0, isl_sioimath_bigarg_src(*src, &scratch));
 			mpz_import(dst, length, -1, sizeof(long), 0, 0, chunks);
-			if (isl_val_is_neg(src))
+			if (isl_int_is_neg(src))
 				mpz_neg(dst, dst);			
 		}
 		else
 		{
 			long *chunks = malloc(length * sizeof(long));
-			impz_export(chunks, NULL, -1, sizeof(long), 0, 0, isl_sioimath_bigarg_src(*src->n, &scratch));
+			impz_export(chunks, NULL, -1, sizeof(long), 0, 0, isl_sioimath_bigarg_src(*src, &scratch));
 			mpz_import(dst, length, -1, sizeof(long), 0, 0, chunks);
-			if (isl_val_is_neg(src))
+			if (isl_int_is_neg(src))
 				mpz_neg(dst, dst);
 			free(chunks);
 		}
@@ -113,7 +113,7 @@ int isl_val_get_num_gmp(__isl_keep isl_val *v, mpz_t z)
 				"expecting rational value", return -1);
 
 	// extract the chunks
-	isl_val_to_gmp(z, v);
+	isl_int_to_gmp(z, v->n);
 
 	return 0;
 }
@@ -130,7 +130,7 @@ int isl_val_get_den_gmp(__isl_keep isl_val *v, mpz_t z)
 		isl_die(isl_val_get_ctx(v), isl_error_invalid,
 				"expecting rational value", return -1);
 
-	isl_val_to_gmp(z, v);
+	isl_int_to_gmp(z, v->d);
 
 	return 0;
 }
