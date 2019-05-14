@@ -362,6 +362,7 @@ nodist_pkginclude_HEADERS = \
 pkginclude_HEADERS = \
 	$(CPP_H) \
 	$(MP_INCLUDE_H) \
+	include/isl/isl-noexceptions.h \
 	include/isl/aff.h \
 	include/isl/aff_type.h \
 	include/isl/arg.h \
