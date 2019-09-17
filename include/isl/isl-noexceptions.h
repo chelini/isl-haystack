@@ -2618,6 +2618,7 @@ public:
   inline schedule_node root() const;
   inline schedule_node sequence_splice_child(int pos) const;
   inline multi_union_pw_aff band_get_partial_schedule() const;
+  inline union_map band_get_partial_schedule_union_map() const;
 };
 
 // declarations for isl::set
@@ -14221,6 +14222,12 @@ multi_union_pw_aff schedule_node::get_prefix_schedule_multi_union_pw_aff() const
 multi_union_pw_aff schedule_node::band_get_partial_schedule() const 
 {
   auto res = isl_schedule_node_band_get_partial_schedule(get());
+  return manage(res);
+}
+
+union_map schedule_node::band_get_partial_schedule_union_map() const
+{
+  auto res = isl_schedule_node_band_get_partial_schedule_union_map(get());
   return manage(res);
 }
 
