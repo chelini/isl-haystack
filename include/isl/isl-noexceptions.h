@@ -2617,6 +2617,7 @@ public:
   inline schedule_node reset_user() const;
   inline schedule_node root() const;
   inline schedule_node sequence_splice_child(int pos) const;
+  inline multi_union_pw_aff band_get_partial_schedule() const;
 };
 
 // declarations for isl::set
@@ -14214,6 +14215,12 @@ union_set schedule_node::get_domain() const
 multi_union_pw_aff schedule_node::get_prefix_schedule_multi_union_pw_aff() const
 {
   auto res = isl_schedule_node_get_prefix_schedule_multi_union_pw_aff(get());
+  return manage(res);
+}
+
+multi_union_pw_aff schedule_node::band_get_partial_schedule() const 
+{
+  auto res = isl_schedule_node_band_get_partial_schedule(get());
   return manage(res);
 }
 
