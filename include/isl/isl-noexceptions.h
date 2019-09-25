@@ -32,6 +32,7 @@
 
 #include <functional>
 #include <string>
+#include <cassert>
 
 namespace isl {
 inline namespace noexceptions {
@@ -2533,6 +2534,22 @@ public:
 inline schedule_node manage(__isl_take isl_schedule_node *ptr);
 inline schedule_node manage_copy(__isl_keep isl_schedule_node *ptr);
 
+/*
+enum class schedule_node_type {
+  schedule_node_band,
+  schedule_node_context,
+  schedule_node_domain,
+  schedule_node_extension,
+  schedule_node_filter,
+  schedule_node_guard,
+  schedule_node_mark,
+  schedule_node_leaf,
+  schedule_node_sequence,
+  schedule_node_set,
+  schedule_node_expansion
+};
+*/
+
 class schedule_node {
   friend inline schedule_node manage(__isl_take isl_schedule_node *ptr);
   friend inline schedule_node manage_copy(__isl_keep isl_schedule_node *ptr);
@@ -2619,6 +2636,8 @@ public:
   inline schedule_node sequence_splice_child(int pos) const;
   inline multi_union_pw_aff band_get_partial_schedule() const;
   inline union_map band_get_partial_schedule_union_map() const;
+  inline unsigned band_n_member() const;
+  inline isl_schedule_node_type get_type() const;
 };
 
 // declarations for isl::set
@@ -14229,6 +14248,43 @@ union_map schedule_node::band_get_partial_schedule_union_map() const
 {
   auto res = isl_schedule_node_band_get_partial_schedule_union_map(get());
   return manage(res);
+}
+
+unsigned schedule_node::band_n_member() const 
+{
+  auto res = isl_schedule_node_band_n_member(get());
+  return res;
+}
+
+isl_schedule_node_type schedule_node::get_type() const
+{
+
+  auto type = isl_schedule_node_get_type(get());
+  switch(type) {
+    case isl_schedule_node_band:
+      return isl_schedule_node_band;
+    case isl_schedule_node_context:
+      return isl_schedule_node_context;
+    case isl_schedule_node_domain:
+      return isl_schedule_node_domain;
+    case isl_schedule_node_extension:
+      return isl_schedule_node_extension;
+    case isl_schedule_node_filter:
+      return isl_schedule_node_filter;
+    case isl_schedule_node_guard:
+      return isl_schedule_node_guard;
+    case isl_schedule_node_mark:
+      return isl_schedule_node_mark;
+    case isl_schedule_node_leaf:
+      return isl_schedule_node_leaf;
+    case isl_schedule_node_sequence:
+      return isl_schedule_node_sequence;
+    case isl_schedule_node_set:
+      return isl_schedule_node_set;
+    default:  
+      assert(false && "cannot convert the node type");
+      return isl_schedule_node_leaf;
+  }
 }
 
 union_map schedule_node::get_prefix_schedule_relation() const
